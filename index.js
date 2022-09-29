@@ -1,10 +1,10 @@
-// need the const fs variable here
+// Const fs variable here
 const fs = require("fs");
 
-// need inquirer variable here
+// Inquirer variable here
 const inquirer = require("inquirer");
 
-// need a markdown js file here
+// Markdown js file here
 const generateMarkdown = require("./utils/generateMarkdown");
 
 
@@ -36,75 +36,9 @@ function validateInput(value) {
     }
 }
 
-
+// QUESTIONS
 const questions = [
-    // Question for the Title
-    {
-        type: "input",
-        name: "title",
-        message: "What is the title of your project?",
-        validate: validateInput,
-    },
-    // Question for the project Description
-    {
-        type: "input",
-        name: "description",
-        message: "Please enter a description of your project.",
-        validate: validateInput,
-    },
-
-    // Table of Contents, andling this in the markdown.js
-
-    // Question for Installation
-    {
-        type: "input",
-        name: "installation",
-        message: "Please enter an explanation how to install the software, or commands for the program.",
-        validate: validateInput,
-    },
-
-    // Question for Usage
-    {
-        type: "input",
-        name: "usage",
-        message: "Please describe how we can use this program/project.",
-        validate: validateInput,
-    },
-
-    // Question for License 
-    {
-        type: "list",
-        name: "license",
-        message: "Please select a license for this project.",
-        choices: [
-            "GNU AGPLv3",
-            "GNU GPLv3",
-            "GNU LGPLv3",
-            "Apache 2.0",
-            "Boost Software 1.0",
-            "MIT",
-            "Mozilla",
-        ],
-        validate: validateInput,
-    },
-
-    // Question for Contributing 
-    {
-        type: "input",
-        name: "contributing",
-        message: "How can users contribute to your project.",
-        validate: validateInput,
-    },
-
-    // Question for Tests
-    {
-        type: "input",
-        name: "tests",
-        message: "Please enter any testing instructions you would like to provide for this project.",
-        validate: validateInput,
-    },
-
-    // QUESTIONS section -- github 
+    // github 
     {
         type: "input",
         name: "userName",
@@ -112,7 +46,7 @@ const questions = [
         validate: validateInput,
     },
 
-    // QUESTIONS section -- email address
+    // email address
     {
         type: "input",
         name: "userEmail",
@@ -125,6 +59,71 @@ const questions = [
             }
         },
     },
+
+    // Title
+    {
+        type: "input",
+        name: "title",
+        message: "What is your project title?",
+        validate: validateInput,
+    },
+
+    // Description
+    {
+        type: "input",
+        name: "description",
+        message: "Please write a  short description of your project.",
+        validate: validateInput,
+    },
+
+    // License 
+    {
+        type: "list",
+        name: "license",
+        message: "What kind of license should your program/project have?",
+        choices: [
+            "GNU AGPLv3",
+            "GNU GPLv3",
+            "GNU LGPLv3",
+            "Apache 2.0",
+            "Boost Software 1.0",
+            "MIT",
+            "Mozilla",
+        ],
+        validate: validateInput,
+    },
+
+    // Installation
+    {
+        type: "input",
+        name: "installation",
+        message: "What command should be run to install the dependencies?",
+        validate: validateInput,
+    },
+
+     // Tests
+     {
+        type: "input",
+        name: "tests",
+        message: "Please enter any testing instructions you would like to provide for this project.",
+        validate: validateInput,
+    },
+
+    // Usage
+    {
+        type: "input",
+        name: "usage",
+        message: "Please describe how we can use this program/project.",
+        validate: validateInput,
+    },
+
+    // Contributing 
+    {
+        type: "input",
+        name: "contributing",
+        message: "How can users contribute to your project.",
+        validate: validateInput,
+    },    
 ];
 
 
@@ -141,7 +140,6 @@ function writeToFile(fileName, data) {
 // function to initalize the beginning of the questions 
 function init() {
     inquirer.prompt(questions).then((data) => {
-        console.log(JSON.stringify(data, null, " "));
         data.getTitle = getTitle(data.getTitle);
             writeToFile("./example/readme.md", data);
     });
