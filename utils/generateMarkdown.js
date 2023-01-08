@@ -1,35 +1,51 @@
-//function to generate the markdown here
+
+// If there is no license, return an empty string
+function renderLicenseSection(license) {
+  if (license === 'The MIT License') {
+    return `[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+    THIS APPLICATION  IS COVERED UNDER THE MIT LICENSE`
+
+  } else if (license === 'Apache 2.0 License') {
+    return `[![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+    THIS APPLICATION  IS COVERED UNDER Apache 2.0 License`
+
+  } else if (license === 'GNU GPL v3') {
+    return `[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
+    THIS APPLICATION  IS COVERED UNDER GNU GPL v3`
+
+  } else {
+    return '';
+  }
+}
+
 function generateMarkdown(data) {
   return `
-# Project Title
-${data.title}
-${data.getLicense}
-# Description
-${data.description}
-# Table of Contents 
-* [Installation](#Installation)
-* [Usage](#Usage)
-* [License](#Installation)
-* [Contributing](#Contributing)
-* [Tests](#Tests)
-* [Questions](#Contact-Information)
-  
-# Installation
+  # ${data.title}
+  ## ${renderLicenseSection(data.license)}
+---
+  ## Description
+  ### ${data.description}
+  ## Table of Contents:
+  - [Description](#description)
+  - [Installation](#installation)
+  - [Usage](#usage)
+  - [Contributing](#contributing)
+  - [Tests](#tests)
+- [Questions?](#questions)
+## Installation:
 ${data.installation}
-# Usage
+## Usage:
 ${data.usage}
-# License 
-${data.license}
-* As this license list was not comprehensive, if you need another license, use the contact information below to ask for license to be added. 
-# Contributing 
+## Contributing:
 ${data.contributing}
-# Tests
+## Tests:
 ${data.tests}
-# Contact Information 
-* GitHub Username: ${data.userName}
-* Contact Email: ${data.userEmail}
+## Questions?
+If you have any additional questions, please reach me at ${data.questions}
+OR
+<br />
+[Github](https://www.github.com/${data.githubusername})
 `;
 }
 
-//need to export the generateMarkdown function 
 module.exports = generateMarkdown;
